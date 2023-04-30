@@ -25,7 +25,7 @@ app.listen(process.env.PORT || 5000, process.env.HOST || "localhost", () => {
 });
 
 //====================================== API Routes [EndPoints] ======================================//
-app.use("/auth", auth)
+app.use("", auth)
 app.use("/superviser", admin)
 app.use("/product", product)
 app.use("/stockRequest", stockRequest)

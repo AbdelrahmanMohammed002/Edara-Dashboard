@@ -76,7 +76,7 @@ router.post(
 
 // Login
 router.post(
-    '/login',
+    '',
     body('email')
         .isEmail()
         .withMessage('please enter a valid email'),
@@ -124,5 +124,138 @@ router.post(
         }
     },
 );
+
+//get all users
+router.get('',
+    admin,
+    authorized,
+
+    async (req, res) => {
+
+        try {
+            const Users = await User.findAll();
+            res.status(200).json({ Users });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ err: err });
+        }
+    }
+)
+
+//user [ List] for a specific User
+router.get('/:id',
+    authorized,
+
+    async (req, res) => {
+
+        try {
+            // 1- check supervisor existence
+            const user = await User.findOne({ where: { id: req.params.id } });
+            if (!user) {
+                return res.status(404).json({
+                    error: [
+                        {
+                            msg: "The user doesn't exist!",
+                        },
+                    ],
+                });
+            }
+
+            res.status(200).json({ user });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ err: err.message });
+        }
+    }
+)
+
+
+//delete user
+router.delete('/delete/:id',
+    authorized,
+    admin,
+    async (req, res) => {
+
+        try {
+            // 1. Check user existence
+            const user = await User.findByPk(req.params.id);
+            if (!user) {
+                return res.status(404).json({
+                    error: [
+                        {
+                            msg: "the user doesn't exist!",
+                        },
+                    ],
+                });
+            }
+
+            // 2. Delete user from the table "User"
+            await User.destroy({
+                where: { id: user.id },
+            });
+
+
+            res.status(200).json({
+                msg: 'user deleted successfully',
+            });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ err: err });
+        }
+    }
+)
+
+
+//Update user
+router.put('/update/:id',
+    authorized,
+    admin,
+    
+    body("id")
+        .isNumeric()
+        .withMessage("you should enter a valid user id")
+        .isLength({ min: 1, max: 20 })
+        .withMessage("Enter a valid user id"),
+    async (req, res) => {
+        try {
+            // 1- Request Validation (express validation)
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+
+           
+
+            // 4- Validate user existence
+            const user = await User.findByPk(req.body.user_id);
+            if (!user) {
+                return res.status(404).json({
+                    error: [
+                        { msg: "The user doesn't exist!" }
+                    ]
+                });
+            }
+
+
+            // 6- Prepare object to be updated
+            const userData = {
+                email: req.body.email,
+                password: hashedPassword,
+                phone: req.body.phone,
+                status: req.body.status,
+                type: req.body.type,
+            };
+
+            // 7- Update user
+            await User.update(userData);
+            res.status(200).json(userData);
+
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ err: err });
+        }
+    }
+);
+
 
 module.exports = router;
