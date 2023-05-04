@@ -1,5 +1,5 @@
 import { SupervisorRequest } from "../../componants/supervhistoryrequest";
-import {SvHeader} from "../../pages/shared/header/superVheader";
+import {SvHeader} from "../../Pages/shared/header/superVheader";
 import Table from 'react-bootstrap/Table';
 
 import axios from 'axios'

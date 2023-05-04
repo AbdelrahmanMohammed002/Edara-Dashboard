@@ -47,7 +47,7 @@ export const Warehouse = (props) => {
 
   return (
     <div>
-       <Card >
+       <Card className="warehouseCard">
 
        <>
         {warehouse.err.map((error, index) => (
@@ -64,9 +64,12 @@ export const Warehouse = (props) => {
       </>
 
       <Card.Body>
-        <Card.Title>{props.name}</Card.Title>
+        <Card.Title><MdOutlinePermIdentity/>{props.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">ID: {props.id}</Card.Subtitle>
         <Card.Text>
+          Status: {props.status}
+        </Card.Text>
+        <Card.Text><MdLocationPin/>
           Location: {props.location}
         </Card.Text>
         <Link className="btn btn-sm btn-primary mx-2" to={'/productList/'+ props.id }>View </Link>

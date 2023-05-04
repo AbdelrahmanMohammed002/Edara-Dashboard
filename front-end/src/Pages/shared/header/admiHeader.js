@@ -12,10 +12,14 @@ export const AdminHeader = () => {
           <li >
               <Link to={'/adminhome'} >Home</Link>
             </li>
+            <li >
+              <Link to={'/userList'} >Users</Link>
+            </li>
 
             <li >
               <Link to={'/svlist'} >Supervisors</Link>
             </li>
+            
            
             <li >
               <Link to={'/whList'}>Warehouses</Link>

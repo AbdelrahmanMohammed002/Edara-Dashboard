@@ -1,4 +1,4 @@
-import { AdminHeader } from "../../pages/shared/header/admiHeader";
+import { AdminHeader } from "../../Pages/shared/header/admiHeader";
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -68,8 +68,8 @@ export const AddSuberv = () => {
     <div className='register1'>
       
 
-    <div className="login-container w-75 ">
-      <h1>Add New User Form</h1>
+    
+      <h1>Add Subervisor</h1>
 
       <>
       {user.err && Array.isArray(user.err) && user.err.map((error, index) => (
@@ -91,6 +91,7 @@ export const AddSuberv = () => {
             type="email"
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             required
+            style={{width:'  15cm'}}
             placeholder="Email"
           />
         </Form.Group>
@@ -101,6 +102,7 @@ export const AddSuberv = () => {
             onChange={(e) => setUser({ ...user, password: e.target.value })}
             type="password"
             required
+            style={{width:'  15cm'}}
             placeholder="password"
           />
         </Form.Group>
@@ -109,7 +111,7 @@ export const AddSuberv = () => {
         <Form.Control
             value={user.phone}
             onChange={(e) => setUser({ ...user, phone: e.target.value })}
-
+            style={{width:'  15cm'}}
             type="phone"
             required
             placeholder="phone"
@@ -119,7 +121,7 @@ export const AddSuberv = () => {
         <Form.Control
             value={user.status}
             onChange={(e) => setUser({ ...user, status: e.target.value })}
-
+            style={{width:'  15cm'}}
             type="text"
             required
             placeholder="status"
@@ -129,120 +131,19 @@ export const AddSuberv = () => {
         <Form.Control
             value={user.type}
             onChange={(e) => setUser({ ...user, type: e.target.value })}
-
+            style={{width:'  15cm'}}
             type="text"
             placeholder="type"
           />
         </Form.Group>
 
-        <Button className="btn btn-dark w-100" variant="primary" type="submit">
+        <Button variant="dark"  type="submit">
           Add New User
         </Button>
       </Form>
-    </div>
-
-    {/* <Form noValidate validated={validated} onSubmit={handleSubmit}>
-    <Form.Label>Add Subervisor</Form.Label>
-  
-      <Row className="mb-3">
-        <Form.Group   md="4" controlId="validationCustomUsername">
-          <Form.Label>Email</Form.Label>
-          <InputGroup hasValidation>
-            <Col>
-            <Form.Control
-              type="text"
-              
-              placeholder="Email"
-              style={{width:'  15cm'}}
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-          </Col>
-            
-            <Form.Control.Feedback type="invalid">
-              Invalid Email.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group   md="4" controlId="validationCustomUsername">
-          <Form.Label>Password</Form.Label>
-          <InputGroup hasValidation>
-          <Col>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              style={{width:' 15cm'}}
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            </Col>
-            <Form.Control.Feedback type="invalid">
-              Please choose a password.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group   md="4" controlId="validationCustomUsername">
-          <Form.Label>Phone</Form.Label>
-          <InputGroup hasValidation>
-          <Col>
-            <Form.Control
-              type="number"
-              style={{width:'      15cm'}}
-              placeholder="Phone"
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            </Col>
-            <Form.Control.Feedback type="invalid">
-              Please enter your phone.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group   md="4" controlId="validationCustomUsername">
-          <Form.Label>Type</Form.Label>
-          <InputGroup hasValidation>
-          <Col>
-            <Form.Control
-              type="text"
-              placeholder="Phone"
-              style={{width:'      15cm'}}
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            </Col>
-            <Form.Control.Feedback type="invalid">
-              Please enter Type.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
-      
-      <Row className="mb-3">
-        <Form.Group   md="4" controlId="validationCustomUsername">
-          <Form.Label>Status</Form.Label>
-          <InputGroup hasValidation>
-          <Col><Form.Control
-              type="Text"
-              placeholder="Status"
-              style={{width:'      15cm'}}
-              aria-describedby="inputGroupPrepend"
-              required
-            /></Col>
-            <Form.Control.Feedback type="invalid">
-              Please enter your ID.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
-      <Button variant="dark" type="submit">Add</Button>
-      </Form>*/}
+    
     </div></div> 
+    
     </>
   );
 }

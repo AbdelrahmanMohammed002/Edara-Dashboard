@@ -1,4 +1,4 @@
-import { AdminHeader } from "../../pages/shared/header/admiHeader";
+import { AdminHeader } from "../../Pages/shared/header/admiHeader";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 import { getAuthUser } from "../../helper/Storage";
-
+import'../../css/register.css'
 
 export const UpdateSuber = () => {
 
@@ -90,11 +90,11 @@ export const UpdateSuber = () => {
 
   return (
     <><AdminHeader />
-      <div className='register'>
+      <div className='updateSv'>
         <br></br>
-        <div className='register1'>
+        <div className='updateSv1'>
           <div className="login-container w-75 ">
-            <h1>Update User Form</h1>
+            <h1>Update Subervisor</h1>
 
             {user.err && Array.isArray(user.err) && user.err.map((error, index) => (
               <Alert key={index} variant='danger' className='p-2'>
@@ -116,6 +116,7 @@ export const UpdateSuber = () => {
                   type="email"
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   required
+                  style={{width:'  15cm'}}
                   placeholder="Email"
                 />
               </Form.Group>
@@ -126,6 +127,7 @@ export const UpdateSuber = () => {
                   type="password"
                   onChange={(e) => setUser({ ...user, password: e.target.value })}
                   required
+                  style={{width:'  15cm'}}
                   maxLength="16" 
                   minLength="8"
                   placeholder="fill it with your orignal password if you won't change it "
@@ -136,10 +138,11 @@ export const UpdateSuber = () => {
                 <Form.Control
                   value={user.phone}
                   onChange={(e) => setUser({ ...user, phone: e.target.value })}
-                  maxLength="16" 
-                  minLength="16"
+                  maxLength="11" 
+                  minLength="11"
                   type="phone"
                   required
+                  style={{width:'  15cm'}}
                   placeholder="phone"
                 />
               </Form.Group>
@@ -147,7 +150,7 @@ export const UpdateSuber = () => {
                 <Form.Control
                   value={user.status}
                   onChange={(e) => setUser({ ...user, status: e.target.value })}
-
+                  style={{width:'  15cm'}}
                   type="text"
                   required
                   placeholder="status"
@@ -157,14 +160,14 @@ export const UpdateSuber = () => {
                 <Form.Control
                   value={user.type}
                   onChange={(e) => setUser({ ...user, type: e.target.value })}
-
+                  style={{width:'  15cm'}}
                   type="text"
                   placeholder="type"
                 />
               </Form.Group>
 
-              <Button className="btn btn-dark w-100" variant="primary" type="submit">
-                Update user
+              <Button  variant="dark" type="submit">
+                Submit
               </Button>
             </Form>
           </div>

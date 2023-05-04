@@ -4,18 +4,12 @@
     text-align: center;
     box-sizing: border-box;
     background-color: rgb(235, 232, 232);
-    width: 7cm;
-    height: 7cm;
+    width: 8cm;
+    height: 7.5cm;
     float: left;
     margin: 0.5cm;
     margin-bottom: 50px !important;
 }
-
-.card-title{
-    font-size: x-large;
-}
-
-
 
 .supervCard:hover {
     transform: scale(1,1);

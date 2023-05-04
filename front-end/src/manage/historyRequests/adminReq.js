@@ -1,5 +1,5 @@
 import { AdminRequest } from "../../componants/adminhistoryrequest";
-import { AdminHeader } from "../../pages/shared/header/admiHeader";
+import { AdminHeader } from "../../Pages/shared/header/admiHeader";
 import { Link } from "react-router-dom";
 
 import Table from 'react-bootstrap/Table';

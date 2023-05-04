@@ -49,8 +49,8 @@ export const Product = (props) => {
 
 
   return (
-    <div>
-      <Card>
+    
+      <Card className="productCard">
 
       <>
         {product.err.map((error, index) => (
@@ -81,7 +81,7 @@ export const Product = (props) => {
         <Link className="btn btn-sm btn-danger mx-2"  onClick={(e) => { DeleteFun(props.id) }} >Delete </Link>
         </Card.Body>
       </Card>
-    </div>
+    
   );
   
 };

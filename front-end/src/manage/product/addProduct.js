@@ -1,4 +1,4 @@
-import { AdminHeader } from "../../pages/shared/header/admiHeader";
+import { AdminHeader } from "../../Pages/shared/header/admiHeader";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';

@@ -133,7 +133,7 @@ export const Login = () => {
     <div className='login'>
       <br />
       <div className='login1'>
-        <h1>Login Form</h1>
+        <h1>Login</h1>
         {login.err.map((error, index) => (
           <Alert key={index} variant='danger' className='p-2'>
             {error.msg}

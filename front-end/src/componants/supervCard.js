@@ -47,6 +47,7 @@ export const Supervisor = (props) => {
   }
 
   return (
+    
     <div>
       <>
         {users.err.map((error, index) => (
@@ -62,9 +63,9 @@ export const Supervisor = (props) => {
         )}
       </>
       
-      <Card>
+      <Card className="supervCard">
         <Card.Body>
-          <Card.Title>User ID: {props.id}</Card.Title>
+          <Card.Title>ID: {props.id}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">Email: {props.email}</Card.Subtitle>
           <Card.Text>
             Phone: {props.phone}

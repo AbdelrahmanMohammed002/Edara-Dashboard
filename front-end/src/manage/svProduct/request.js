@@ -1,4 +1,4 @@
-import { SvHeader } from "../../pages/shared/header/superVheader";
+import { SvHeader } from "../../Pages/shared/header/superVheader";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
