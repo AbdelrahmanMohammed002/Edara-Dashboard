@@ -9,8 +9,8 @@ const { Warehouse } = require("../Models/DB"); // Importing Warehouse model
 
 //create warehouse
 router.post('/create',
-    authorized,
-    admin,
+    // authorized,
+    // admin,
     body("name")
         .isString().withMessage("please enter a valid warehouse name!")
         .isLength({ min: 1 })
@@ -132,8 +132,8 @@ router.delete('/delete/:id',
 // get all warehouses
 router.get('',
 
-    authorized,
-    admin,
+    // authorized,
+    // admin,
 
     async (req, res) => {
         try {

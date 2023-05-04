@@ -12,11 +12,11 @@ router.post('/create',
     authorized,
     admin,
 
-    body("warehouse_id")
-        .isNumeric()
-        .withMessage("you should enter a valid warehouse id")
-        .isLength({ min: 1, max: 20 })
-        .withMessage("Enter a valid warehouse id"),
+    // body("warehouse_id")
+    //     .isNumeric()
+    //     .withMessage("you should enter a valid warehouse id")
+    //     .isLength({ min: 1, max: 20 })
+    //     .withMessage("Enter a valid warehouse id"),
 
     body("user_id")
         .isNumeric()
@@ -25,7 +25,7 @@ router.post('/create',
         .withMessage("Enter a valid user id"),
 
     async (req, res) => {
-        try {
+        try { 
 
             //1- Request Validation (express validation)
             const errors = validationResult(req);
@@ -220,8 +220,8 @@ router.delete('/delete/:id',
 
 //get all supervisors
 router.get('',
-    admin,
-    authorized,
+    // admin,
+    // authorized,
 
     async (req, res) => {
 
@@ -261,4 +261,39 @@ router.get('/:id',
         }
     }
 )
+
+//specific supervisor with specific user
+
+router.get('/User/:id', 
+// authorized,
+ async (req, res) => {
+  try {
+
+    // 1. Find the user based on the id
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        error: [{ msg: "The user doesn't exist!" }],
+      });
+    }
+
+    // 2. Find the supervisor data associated with the user
+    const supervisor = await Supervisor.findOne({ where: { user_id: user.id } });
+    if (!supervisor) {
+      return res.status(404).json({
+        error: [{ msg: "The supervisor doesn't exist for this user!" }],
+      });
+    }
+
+    // 3. Return the supervisor data
+    res.status(200).json({ supervisor });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: err.message });
+  }
+});
+
+
+
+
 module.exports = router;

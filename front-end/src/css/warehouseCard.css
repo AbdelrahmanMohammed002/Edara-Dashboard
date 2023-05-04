@@ -1,0 +1,36 @@
+.warehouseCard {
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    box-sizing: border-box;
+    width: 7cm;
+    height: 9cm;
+    float: left;
+    background-color: #e1dddd;
+    margin: 0.5cm;
+    margin-bottom: 50px !important;
+}
+
+.card-title{
+    font-size: x-large;
+}
+
+
+
+.warehouseCard:hover {
+    transform: scale(1,1);
+    transform: all linear 200ms;
+    z-index: 1;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+.warehouseCardbutton{
+    background-color: #020d09;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 0.3cm;
+    border: none;
+    cursor: pointer;
+    width: 110px;
+}
+
+

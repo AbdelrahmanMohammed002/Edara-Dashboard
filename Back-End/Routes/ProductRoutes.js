@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const authorized = require("../middlewares/Authorize")
 const admin = require("../middlewares/Admin")
-const {Products, Warehouse}= require("../Models/DB")
+const {Products, Warehouse ,Supervisor}= require("../Models/DB")
 const { body, validationResult } = require("express-validator");
 //upload images
 const upload = require("../middlewares/uploadImages")
@@ -12,8 +12,8 @@ const fs = require("fs")
 //CREATE Product
 router.post('/create',
 
-    authorized,
-    admin,
+    // authorized,
+    // admin,
     upload.single("photo"), //images middleware
     body("name")
         .isString().withMessage("please enter a valid product name!")
@@ -87,8 +87,8 @@ router.post('/create',
 //Update product
 router.put('/update/:id',
 
-    authorized,
-    admin,
+    // authorized,
+    // admin,
     upload.single("photo"), //images middleware
     body("name")    //validate name
         .isString().withMessage("please enter a valid product name!")
@@ -192,7 +192,10 @@ router.delete('/delete/:id',
 )
 
 //get all products
-router.get('', admin, authorized, async (req, res) => {
+router.get('', 
+// admin, 
+// authorized, 
+async (req, res) => {
     try {
       const products = await Products.findAll();
       const productsWithPhotoUrl = products.map(product => {
@@ -204,13 +207,13 @@ router.get('', admin, authorized, async (req, res) => {
       res.status(200).json({ Products: productsWithPhotoUrl });
     } catch (err) {
       console.log(err);
-      res.status(500).json({ err: err });
+      res.status(404).json({ err: console.log(err) });
     }
   });
 
 //user [ List] for a specific warehouse
 router.get('/warehouse/:id',
-    authorized,
+    // authorized,
 
     async (req, res) => {
 
@@ -233,7 +236,7 @@ router.get('/warehouse/:id',
                 attributes: ['id', 'name', 'description', 'photo', 'stock'],
                 include: {
                     model: Warehouse,
-                    attributes: ['location']
+                    attributes: ['id']
                 }
             });
     
@@ -251,6 +254,38 @@ router.get('/warehouse/:id',
         }
     }
 )
+// get the product of a specific supervisor
+router.get('/supervisor/:id', async (req, res) => {
+    try {
+      const supervisorId = req.params.id;
+  
+      // Check if supervisor exists
+      const supervisor = await Supervisor.findOne({ where: { id: supervisorId } });
+      if (!supervisor) {
+        return res.status(404).json({ error: 'Supervisor not found' });
+      }
+  
+      // Get all products for the supervisor's warehouse
+      const products = await Products.findAll({
+        where: { warehouse_id: supervisor.warehouse_id },
+        attributes: ['id', 'name', 'description', 'photo', 'stock'],
+        include: {
+          model: Warehouse,
+          attributes: ['id'],
+        },
+      });
+  
+      products.forEach((product) => {
+        product.photo = `http://${req.hostname}:5000/${product.photo}`;
+      });
+  
+      res.status(200).json({ products });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 
 //user [ List] for a specific product
 router.get('/:id',

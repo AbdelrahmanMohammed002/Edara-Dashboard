@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const authorized = require("../middlewares/Authorize")
+const admin = require("../middlewares/Admin")
 const { User } = require("../Models/DB");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt") // to encrypt the pasword
@@ -76,7 +78,7 @@ router.post(
 
 // Login
 router.post(
-    '',
+    '/login',
     body('email')
         .isEmail()
         .withMessage('please enter a valid email'),
@@ -127,8 +129,8 @@ router.post(
 
 //get all users
 router.get('',
-    admin,
-    authorized,
+    // admin,
+    // authorized,
 
     async (req, res) => {
 
@@ -143,13 +145,14 @@ router.get('',
 )
 
 //user [ List] for a specific User
-router.get('/:id',
+router.get('/getUser/:id',
     authorized,
+    admin,
 
     async (req, res) => {
 
         try {
-            // 1- check supervisor existence
+            // 1- check user existence
             const user = await User.findOne({ where: { id: req.params.id } });
             if (!user) {
                 return res.status(404).json({
@@ -210,12 +213,7 @@ router.delete('/delete/:id',
 router.put('/update/:id',
     authorized,
     admin,
-    
-    body("id")
-        .isNumeric()
-        .withMessage("you should enter a valid user id")
-        .isLength({ min: 1, max: 20 })
-        .withMessage("Enter a valid user id"),
+
     async (req, res) => {
         try {
             // 1- Request Validation (express validation)
@@ -224,10 +222,8 @@ router.put('/update/:id',
                 return res.status(400).json({ errors: errors.array() });
             }
 
-           
-
             // 4- Validate user existence
-            const user = await User.findByPk(req.body.user_id);
+            const user = await User.findByPk(req.params.id);
             if (!user) {
                 return res.status(404).json({
                     error: [
@@ -236,6 +232,7 @@ router.put('/update/:id',
                 });
             }
 
+            const hashedPassword = await bcrypt.hash(req.body.password, 10); //hashing user password to be saved in the db
 
             // 6- Prepare object to be updated
             const userData = {
@@ -247,7 +244,7 @@ router.put('/update/:id',
             };
 
             // 7- Update user
-            await User.update(userData);
+            await User.update(userData, { where: { id: req.params.id } });
             res.status(200).json(userData);
 
         } catch (err) {
@@ -256,6 +253,5 @@ router.put('/update/:id',
         }
     }
 );
-
 
 module.exports = router;

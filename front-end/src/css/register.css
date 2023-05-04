@@ -1,0 +1,60 @@
+
+.register
+{
+  height: 22cm;
+  width: 100%;
+  background-repeat: no-repeat;
+  align-items: center;
+  background-size: cover;
+  background-image: url(/src/assets/images/pexels-dominika-roseclay-1036841.jpg);
+
+}
+.register1{
+  margin-top: 1cm;
+  margin-left: 20cm;
+    align-content: center;
+    font-size: large;
+    text-align: center;
+    background-color: white;
+    width: 15cm;
+    height: 19cm;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.55em;
+  
+}
+
+.updateSv  {
+  height: 21cm;
+  width: 100%;
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+  background-image: url(/src/assets/images/pexels-nothing-ahead-4502492.jpg);
+
+}
+.updateSv1{
+  margin-left: 11cm;
+  margin-bottom: 2cm;
+  background-color: white;
+  width: 18cm;
+  height: 17cm;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  
+}
+
+.updateSvbutton {
+  background-color: #020d09;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+}
