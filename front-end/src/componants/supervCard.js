@@ -1,86 +1,82 @@
 
 import "../css/supervCard.css";
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import Card from 'react-bootstrap/Card';
-import { getAuthUser } from "../helper/Storage";
-import axios from "axios";
 import Alert from 'react-bootstrap/Alert';
-import { useParams } from "react-router-dom";
-
+import Card from 'react-bootstrap/Card';
+import axios from 'axios'
+import { getAuthUser } from "../helper/Storage";
+import { useParams , Link} from "react-router-dom";
 
 export const Supervisor = (props) => {
- 
+
   let { id } = useParams();
   const auth = getAuthUser();
-
-  const [users, setUsers] = useState({
+  const [supervisors, setSupervisors] = useState({
     loading: true,
     results: [],
     err : [],
     success: '',
-    reload: false
+    reload: 0
   });
- 
   // delete Function
   const DeleteFun = (id) => {
     axios
-      .delete("http://localhost:5000/auth/delete/" + id, {
+      .delete("http://localhost:5000/superviser/delete/" + id, {
         headers: {
           token: auth.token,
         },
       })
       .then((resp) => {
-        setUsers((prevState) => ({
+        setSupervisors((prevState) => ({
           ...prevState,
           reload: true,
           success:"deleted successfully"
         }));
       })
       .catch((err) => {
-        setUsers((prevState) => ({
+        setSupervisors((prevState) => ({
           ...prevState,
           loading: false,
           err: err.response.data.errors,
         }));
       });
   }
-
   return (
     
     <div>
+      
+      
       <>
-        {users.err.map((error, index) => (
+        {supervisors.err.map((error, index) => (
           <Alert key={index} variant='danger' className='p-2'>
             {error.msg}
           </Alert>
         ))}
 
-        {users.success && (
+        {supervisors.success && (
           <Alert variant="success" className="p-2">
-            {users.success}
+            {supervisors.success}
           </Alert>
         )}
       </>
       
-      <Card className="supervCard">
-        <Card.Body>
-          <Card.Title>ID: {props.id}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Email: {props.email}</Card.Subtitle>
-          <Card.Text>
-            Phone: {props.phone}
-          </Card.Text>
-          <Card.Text>
-            Status: {props.status}
-          </Card.Text>
-          <Card.Text>
-            Type: {props.type}
-          </Card.Text>
-          <Link className="btn btn-sm btn-primary mx-2 " to={'/assign/'+ props.id}>Assign</Link>
-          <Link className="btn btn-sm btn-warning mx-2 " to={'/updateSv/'+ props.id }>Update</Link>
-          <Link className="btn btn-sm btn-danger mx-2" to={'/svList'} onClick={(e) => { DeleteFun(props.id) }} >Delete</Link>
-        </Card.Body>
-      </Card>
+    <Card className="supervCard">
+    <Card.Body>
+        <Card.Text>
+        Subervisor with
+        </Card.Text>
+        <Card.Text>
+        ID: {props.user}
+        </Card.Text>
+        <Card.Text>
+        Assigned to Warehouse
+        </Card.Text>
+        <Card.Text>
+        with ID: {props.warehouse}
+        </Card.Text>
+        <Link className="btn btn-sm btn-danger mx-2"  onClick={(e) => { DeleteFun(props.id) }} to={'/whList'}>Delete </Link>
+      </Card.Body>
+    </Card>
     </div> 
   );
 };

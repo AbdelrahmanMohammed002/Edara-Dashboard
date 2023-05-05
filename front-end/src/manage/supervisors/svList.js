@@ -8,27 +8,27 @@ import Alert from 'react-bootstrap/Alert';
 
 export const SvList = () => {
 
-  const [users, setUsers] = useState({
+  const [supervisors, setSupervisors] = useState({
     loading: true,
     results: [],
     err: null,
     reload: 0
   });
- 
+
   useEffect(() => {
-    setUsers({ ...users, loading: true })
+    setSupervisors({ ...supervisors, loading: true })
 
     axios
-      .get('http://localhost:5000/auth/')
+      .get('http://localhost:5000/superviser')
       .then(resp => {
         console.log(resp);
-        setUsers({ ...users, results: resp.data.Users, loading: false })
+        setSupervisors({ ...supervisors, results: resp.data.supervisors, loading: false })
       })
       .catch(err => {
-        setUsers({ ...users, err: "Something went wrong", loading: false })
-
-      })
-  }, [])
+        setSupervisors({ ...supervisors, err: "Something went wrong", loading: false })
+      }
+      )
+    }, [])
 
 
   return (
@@ -40,13 +40,10 @@ export const SvList = () => {
               <Link to={'/adminhome'} >Home</Link>
             </li>
 
-            <li >
-              <Link to={'/addsv'} >Add Supervisor</Link>
-            </li>
             </ul>
             <div className="home-container p-5">
              {/* loader */}
-        {users.loading === true && (
+        {supervisors.loading === true && (
           <div className="text-center">
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Loading...</span>
@@ -54,19 +51,17 @@ export const SvList = () => {
           </div>
         )}
       
-      {users.loading === false && users.err == null && (
+      {supervisors.loading === false && supervisors.err == null && (
           <div className="row">
-            {Array.isArray(users.results) &&
-              users.results.map((user) => (
-                <div className="col-3 card-users-container" key={user.id}>
+            {Array.isArray(supervisors.results) &&
+              supervisors.results.map((supervisor) => (
+                <div className="col-3 card-users-container" key={supervisor.id}>
 
                   <Supervisor
 
-                    id={user.id}
-                    email={user.email}
-                    phone={user.phone}
-                    status={user.status}
-                    type={user.type}
+                    id={supervisor.id}
+                    user={supervisor.user_id}
+                    warehouse={supervisor.warehouse_id}
                   />
                 </div>
 

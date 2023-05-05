@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "../../css/whList.css";
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner';
-import Alert from 'react-bootstrap/Alert';
 
 export const WhList = () => {
 

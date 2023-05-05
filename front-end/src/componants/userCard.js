@@ -62,7 +62,7 @@ export const User = (props) => {
         )}
       </>
       
-      <Card className="supervCard">
+      <Card className="userCard">
         <Card.Body>
           <Card.Title>User ID: {props.id}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">Email: {props.email}</Card.Subtitle>
@@ -75,6 +75,7 @@ export const User = (props) => {
           <Card.Text>
             Type: {props.type}
           </Card.Text>
+          <Link className="btn btn-sm btn-primary mx-2 " to={'/assign/'+ props.id}>Assign</Link>
           <Link className="btn btn-sm btn-warning mx-2 " to={'/updateUser/'+ props.id }>Update</Link>
           <Link className="btn btn-sm btn-danger mx-2" to={'/userList'} onClick={(e) => { DeleteFun(props.id) }} >Delete</Link>
         </Card.Body>
