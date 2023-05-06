@@ -4,6 +4,7 @@ import '../../../css/superVheader.css'
 import { getAuthUser } from "../../../helper/Storage";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import { removeAuthUser } from "../../../helper/Storage";
 
 
 export const SvHeader = () => {
@@ -16,6 +17,10 @@ export const SvHeader = () => {
       err: null,
       reload: 0
     });
+
+    const logout = () => {
+      removeAuthUser()
+    }
    
     useEffect(() => {
       setSupervisor({ ...supervisor, loading: true })
@@ -53,7 +58,7 @@ export const SvHeader = () => {
               <Link to={'/supervisorHistory/' + supervisor.results.id}>Requests</Link>
             </li>
             <li className="nav-item2" >
-            <Link to={'/'} >LogOut</Link>
+            <Link onClick={logout} to={'/'} >LogOut</Link>
             </li>
           </ul>
         </div>

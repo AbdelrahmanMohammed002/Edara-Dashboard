@@ -1,6 +1,4 @@
 export const setAuthUser = (data) => {
-    // save object to the local storage
-    // Stringify OBJECT TO TEXT
     localStorage.setItem("user", JSON.stringify(data));
   };
   

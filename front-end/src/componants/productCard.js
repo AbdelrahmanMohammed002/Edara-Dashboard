@@ -50,7 +50,7 @@ export const Product = (props) => {
 
   return (
     
-      <Card className="productCard">
+      <Card >
 
       <>
         {product.err.map((error, index) => (

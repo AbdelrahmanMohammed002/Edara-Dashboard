@@ -4,7 +4,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from "react-router-dom";
 
 import { getAuthUser } from "../helper/Storage";
-import axios from "axios";
 import Alert from 'react-bootstrap/Alert';
 import { useParams } from "react-router-dom";
 import React, { useState } from "react";

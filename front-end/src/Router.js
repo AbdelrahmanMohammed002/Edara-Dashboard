@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ProductList } from "./manage/product/productList";
 import { SvProductList } from "./manage/svProduct/superVproductList ";
 import { Request } from "./manage/svProduct/request";
-import { Login } from "./Pages/Auth/login";
+import { Login } from "./Pages/auth/login";
 import { AddWarehouse } from "./manage/warehouses/addwarehou";
 import { UpdateWarehous } from "./manage/warehouses/updatewarehou";
 import { SvHome } from "./Pages/home/svhome";
@@ -132,10 +132,12 @@ export const routes = createBrowserRouter([
         ]
       },
       
-    
-      
     ],
   },
+  {
+    path:'*',
+    element:<Login/>
+  }
 ]);
 
 

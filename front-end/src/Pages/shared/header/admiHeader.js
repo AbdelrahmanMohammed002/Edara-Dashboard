@@ -1,8 +1,15 @@
 // import image
 import { Link } from "react-router-dom";
 import '../../../css/adminHeader.css'
+import { removeAuthUser } from "../../../helper/Storage";
+
 
 export const AdminHeader = () => {
+
+  const logout = () => {
+    removeAuthUser()
+  }
+
   return (
     <>
       <nav >
@@ -28,7 +35,7 @@ export const AdminHeader = () => {
               <Link to={'/adminhistory'}>Requests</Link>
             </li>
             <li className="nav-item2" >
-            <Link to={'/'} >LogOut</Link>
+            <Link onClick={logout} to={'/'} >LogOut</Link>
             </li>
           </ul>
         </div>
